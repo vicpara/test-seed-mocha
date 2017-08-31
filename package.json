@@ -1,0 +1,30 @@
+{
+    "name": "websocket.io",
+    "description": "DBS server",
+    "version": "0.0.1",
+    "contributors": [{
+        "name": "Victor Paraschiv",
+        "email": "victor.paraschiv@linklaters.com"
+    }],
+    "dependencies": {
+        "debug": "*",
+        "ws": "0.4.20"
+    },
+    "devDependencies": {
+        "assert": "^1.4.1",
+        "benchmark": "0.2.2",
+        "chai": "^4.1.2",
+        "colors": "^1.1.2",
+        "mocha": "^3.5.0",
+        "should": "^12.0.0",
+        "mochawesome": "^2.3.0",
+        "selenium-webdriver": "^3.5.0"
+    },
+    "main": "lib/websocket.io",
+    "engines": {
+        "node": ">=0.6.0"
+    },
+    "scripts": {
+        "test": "mocha --reporter mochawesome"
+    }
+}
