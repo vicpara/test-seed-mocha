@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 var assert = chai.assert;
 
 describe('hooks', function() {
@@ -46,6 +48,7 @@ describe('a suite of tests', function() {
 })
 
 describe('add()', function() {
+    this.timeout(500);
     var tests = [
         { args: [1, 2], expected: 3 },
         { args: [1, 2, 3], expected: 6 },
