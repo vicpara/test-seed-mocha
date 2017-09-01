@@ -19,7 +19,12 @@
         "browserify":"^14.4.0",
         "express": "4.15.4",
         "webpage":"^0.3.0",
-        "system":"^2.0.1"
+        "system":"^2.0.1",
+        "casper-chai":"^0.3.0",
+        "casperjs":"^1.1.4",
+        "mocha-casperjs":"^0.6.0",
+        "slimerjs":"^0.10.3"
+
     },
     "devDependencies": {
         "mocha": "^3.5.0",
