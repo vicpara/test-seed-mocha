@@ -1,0 +1,337 @@
+@import "variables.rftt.scss";
+@import "mixins.scss";
+@import url('https://fonts.googleapis.com/css?family=PT+Mono');
+// Global Components
+body {
+    @include body-font;
+    overflow-x: hidden;
+    font-size: 1.5em;
+}
+
+.text-muted {
+    color: $gray;
+    font-size: 1.5em;
+}
+
+.text-primary {
+    color: $theme-primary;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    outline: none;
+}
+
+a {
+    color: $theme-primary;
+}
+
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: darken($theme-primary, 10%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @include heading-font;
+    // font-weight: 500;
+}
+
+.noncaps {
+    font-family: "Rajdhani", sans-serif;
+    text-transform: none;
+}
+
+.vision-head-image {
+    margin-bottom: 30px;
+    max-height: 120px;
+}
+
+.img-centered {
+    margin: 0 auto;
+}
+
+.bg-light-gray {
+    background-color: $gray-lighter;
+}
+
+.bg-darkest-gray {
+    background-color: $gray-darker;
+}
+
+.marginleft {
+    margin-left: 30px;
+}
+
+.benefits-icon {
+    height: 61px;
+    color: white;
+    z-index: 200;
+}
+
+// Custom Navigation Bar
+.navbar-brand {
+    height: 90%;
+}
+
+li a.rftt {
+    // margin-right: 10px;
+    padding: 5px 0px 0px 0px;
+    font-weight: bold;
+    color: #821717;
+}
+
+.body-text {
+    font-size: 1.5em;
+    color: $gray;
+}
+
+.navbar-custom {
+    background-color: $gray-darker;
+    border-color: transparent;
+    .navbar-brand {
+        color: $theme-primary;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            color: darken($theme-primary, 10%);
+        }
+    }
+    .navbar-collapse {
+        border-color: fade-out(white, .02);
+        color: $theme-primary;
+    }
+    .navbar-toggle {
+        background-color: $theme-primary;
+        border-color: $theme-primary;
+        @include heading-font;
+        color: white;
+        font-size: 12px;
+        &:hover,
+        &:focus {
+            background-color: $theme-primary;
+        }
+    }
+    .nav {
+        li {
+            a {
+                @include body-font;
+                font-weight: 400;
+                letter-spacing: 1px;
+                color: black;
+                &:hover,
+                &:focus {
+                    border-radius: 0px 0px 10px 10px;
+                    color: $theme-primary;
+                    outline: none;
+                }
+            }
+        }
+        .signin {
+            font-size: 14px;
+            margin-left: 20px;
+        }
+    }
+    .navbar-nav {
+        @include body-font;
+        font-size: 16px;
+    }
+    .navbar-nav>.active>a {
+        border-radius: 0px 0px 10px 10px;
+        color: white;
+        background-color: $theme-primary;
+    }
+    .navbar-nav>.active>a:hover,
+    .navbar-nav>.active>a:focus {
+        color: white;
+        background-color: darken($theme-primary, 10%);
+        border-radius: 0px 0px 10px 10px;
+    }
+}
+
+div.tab-pane>div.row:first-child {
+    font-weight: bold;
+    .pair-name,
+    .pair-value,
+    .pair-id {
+        background-color: #dfdfdf;
+    }
+    .pair-value {
+        white-space: pre;
+    }
+}
+
+header {
+    h1 {
+        font-size: 3.5em;
+    }
+    ul.intro-gets-list {
+        font-size: 1.3em;
+        list-style-type: none;
+        padding-top: 24px;
+        padding-left: 5px;
+        overflow: hidden;
+    }
+    li.intro-gets {
+        display: block;
+        float: left;
+    }
+    li.intro-gets:before {
+        content: ">";
+        padding-right: 5px;
+        margin-left: 20px;
+    }
+    .actionbutton {
+        min-width: 150px;
+    }
+}
+
+@media(min-width:768px) {
+    .navbar-custom {
+        background-color: transparent;
+        padding: 10px 0;
+        -webkit-transition: padding 0.3s;
+        -moz-transition: padding 0.3s;
+        transition: padding 0.3s;
+        border: none;
+        .navbar-brand {
+            font-size: 2em;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+        .navbar-nav>.active>a {
+            border-radius: 0px 0px 10px 10px;
+        }
+    }
+}
+
+.logo {
+    height: 50px;
+    padding: 9px 0px;
+}
+
+header {
+    background-repeat: repeat;
+    background-color: #777;
+    text-align: center;
+    color: white;
+    .intro-text {
+        padding-top: 18vmin;
+        padding-bottom: 16vmin;
+    }
+}
+
+@media (max-width:767px) {
+    .navbar-custom .nav li a {
+        color: $theme-primary;
+    }
+    body {
+        font-size: 1.23em;
+    }
+}
+
+@media(min-width:768px) {
+    .navbar-custom.affix {
+        background-color: #f8f8f8;
+        padding: 0px 0px;
+        .navbar-brand {
+            font-size: 1.5em;
+        }
+        .logo {
+            height: 50px;
+            padding: 8px 0px;
+        }
+    }
+    header {
+        .intro-text {
+            // padding-top: 300px;
+            padding-top: 25vmin;
+            padding-bottom: 20vmin;
+        }
+        .intro-text-right {
+            padding-top: 150px;
+            padding-bottom: 30px;
+        }
+    }
+}
+
+section#stats {
+    padding: 100px 10px 10px 10px;
+}
+
+// Global Section Styles
+section {
+    font-family: 'PT Mono', monospace;
+    padding: 10px 10px;
+    font-size: 0.8em;
+    h2.section-heading {
+        font-size: 2.4em;
+        margin-top: 1vh;
+        margin-bottom: 8vh;
+    }
+    h3.section-subheading {
+        font-size: 1.8rem;
+        // @include serif-font;
+        text-transform: none;
+        font-style: italic;
+        font-weight: 400;
+        margin-bottom: 10vh;
+    }
+    .intro-text {
+        padding-top: 100px;
+    }
+    .intro-text-right {
+        padding-top: 0px;
+    }
+}
+
+@media(min-width:768px) {
+    section {
+        padding: 10px 10px;
+    }
+}
+
+// Footer
+footer {
+    background-color: #f8f8f8;
+    color: #333;
+    padding: 7px 0;
+    text-align: center;
+    font-size: 15px;
+    border-top-style: solid;
+    border-top: 1px double #cecece;
+    span.copyright {
+        line-height: 20px;
+        @include heading-font;
+        text-transform: none;
+        // color: white;
+    }
+    ul.quicklinks {
+        margin-bottom: 0;
+        line-height: 20px;
+        @include heading-font;
+        text-transform: none;
+    }
+}
+
+.btn:focus,
+.btn:active,
+.btn.active,
+.btn:active:focus {
+    outline: none;
+}

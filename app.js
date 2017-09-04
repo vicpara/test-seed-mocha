@@ -6,7 +6,7 @@ const util = require('util');
 const app = express();
 
 var lockFile = "_lock_file.lock";
-var reportFile = "reports/index.html";
+var reportFile = "package.json";
 var portNumber = 5000;
 
 app.get('/', function(req, res) {
@@ -20,6 +20,7 @@ app.listen(portNumber, function() {
 
 app.get('/index', function(req, res) {
     console.error("File job");
+    getViewStats();
     if (fs.existsSync(lockFile)) {
         runningTime()
     } else {
@@ -40,11 +41,11 @@ function getViewStats() {
     var running = false;
     var reportExists = false;
 
-    Promise.all([fileExists(lockFile)]).then(function(res) {
-        console.error("HA AHAHAHAHAHAHA " + res[0]);
-    });
-    // fileExists(lockFile);
-    // fileExists(reportFile);
+    Promise
+        .all([fileExists(lockFile), fileExists(reportFile), runningTime(), reportCreationTime()])
+        .then(function(res) {
+            console.error("HA AHAHAHAHAHAHA " + res[0] + " " + res[1] + " " + res[2] + " " + res[3]);
+        });
 
     Promise.all(
         [fileExists(lockFile), runningTime(), fileExists(reportFile), reportCreationTime()]
@@ -60,26 +61,34 @@ function getViewStats() {
 
 function fileExists(filename) {
     return new Promise(function(resolve, reject) {
-        fs.exists(filename, function(exists) {
-            resolve(exists);
-        });
+        fs.exists(filename, (exists) => { resolve(exists); });
     });
 }
 
 function reportCreationTime() {
-    fs.stat(reportFile, function(err, stats) {
-        if (err) return cb2(err);
-        return stats.birthtime;
+    fileExists(reportFile).then((exists) => {
+        console.error("HERE WE HAAAAAAVVVEEE: " + exists)
+
+        return new Promise(function(resolve, reject) {
+            fs.stat(reportFile, function(err, stats) {
+                if (err) reject(err);
+                resolve(stats.birthtime);
+            });
+        });
+
     });
 }
 
+
 function runningTime() {
-    fs.stat(lockFile, function(err, stats) {
-        if (err) return cb2(err);
-        var birth = stats.birthtime;
-        var deltaTime = parseInt((new Date().getTime() - birth.getTime()) / 1000 / 60);
-        console.error("Here are stats :", deltaTime);
-        return deltaTime;
+    return new Promise(function(resolve, reject) {
+        fs.stat(lockFile, function(err, stats) {
+            if (err) reject(err);
+            var birth = stats.birthtime;
+            var deltaTime = parseInt((new Date().getTime() - birth.getTime()) / 1000 / 60);
+            console.error("Here are stats :", deltaTime);
+            resolve(deltaTime);
+        });
     });
 }
 
