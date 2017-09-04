@@ -16,15 +16,13 @@
         "chai": "^4.1.2",
         "colors": "^1.1.2",
         "should": "^12.0.0",
-        "browserify":"^14.4.0",
+        "webpage": "^0.3.0",
+        "browserify": "^14.4.0",
         "express": "4.15.4",
-        "webpage":"^0.3.0",
-        "system":"^2.0.1",
-        "casper-chai":"^0.3.0",
-        "casperjs":"^1.1.4",
-        "mocha-casperjs":"^0.6.0",
-        "slimerjs":"^0.10.3"
-
+        "mustache": "^2.3.0",
+        "system": "^2.0.1",
+        "casper-chai": "^0.3.0",
+        "mocha-casperjs": "^0.6.0"
     },
     "devDependencies": {
         "mocha": "^3.5.0",
@@ -42,6 +40,6 @@
         "node": ">=0.6.0"
     },
     "scripts": {
-        "test": "browserify test.js -o test-g.js && mocha --reporter mochawesome --compilers js:babel-core/register"
+        "test": "browserify imdb.js -o imdb-g.js && mocha --reporter mochawesome --compilers js:babel-core/register"
     }
 }
