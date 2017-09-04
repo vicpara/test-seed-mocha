@@ -6,7 +6,7 @@ const util = require('util');
 const app = express();
 
 var lockFile = "_lock_file.lock";
-var statsFile = "reports/index.html";
+var reportFile = "reports/index.html";
 var portNumber = 5000;
 
 app.get('/', function(req, res) {
@@ -36,13 +36,50 @@ app.get('/index', function(req, res) {
     res.send('Hello INDEX World!')
 })
 
+function getViewStats() {
+    var running = false;
+    var reportExists = false;
+
+    Promise.all([fileExists(lockFile)]).then(function(res) {
+        console.error("HA AHAHAHAHAHAHA " + res[0]);
+    });
+    // fileExists(lockFile);
+    // fileExists(reportFile);
+
+    Promise.all(
+        [fileExists(lockFile), runningTime(), fileExists(reportFile), reportCreationTime()]
+    ).then(function(res) {
+        return {
+            "running": res[0],
+            "runningTime": res[1],
+            "hasReport": res[2],
+            "reportCreated": res[3]
+        }
+    });
+}
+
+function fileExists(filename) {
+    return new Promise(function(resolve, reject) {
+        fs.exists(filename, function(exists) {
+            resolve(exists);
+        });
+    });
+}
+
+function reportCreationTime() {
+    fs.stat(reportFile, function(err, stats) {
+        if (err) return cb2(err);
+        return stats.birthtime;
+    });
+}
+
 function runningTime() {
     fs.stat(lockFile, function(err, stats) {
         if (err) return cb2(err);
         var birth = stats.birthtime;
         var deltaTime = parseInt((new Date().getTime() - birth.getTime()) / 1000 / 60);
         console.error("Here are stats :", deltaTime);
-        return deltaTime
+        return deltaTime;
     });
 }
 
