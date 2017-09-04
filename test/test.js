@@ -61,7 +61,7 @@ describe("DBS server", function () {
             headers: {
                 "iv-user": "TestUser",
                 "iv-groups": "testRequester@yahoo.com",
-                "dbsadid": "testuser@linklaters.com"
+                "dbsadid": "testuser@yahoo.com"
             }
         };
 
