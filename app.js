@@ -24,15 +24,7 @@ app.get('/index', function(req, res) {
     if (fs.existsSync(lockFile)) {
         runningTime()
     } else {
-        fs.open(lockFile, 'wx', (err, fd) => {
-            if (err) {
-                if (err.code === 'EEXIST') {
-                    console.error(lockFile + ' myfile already exists');
-                    return;
-                }
-                throw err;
-            }
-        });
+
     }
     res.send('Hello INDEX World!')
 })
@@ -67,15 +59,16 @@ function fileExists(filename) {
 
 function reportCreationTime() {
     fileExists(reportFile).then((exists) => {
-        console.error("HERE WE HAAAAAAVVVEEE: " + exists)
-
+        console.error(" >>> HERE WE HAAAAAAVVVEEE: " + exists)
         return new Promise(function(resolve, reject) {
-            fs.stat(reportFile, function(err, stats) {
-                if (err) reject(err);
-                resolve(stats.birthtime);
-            });
+            try {
+                resolve(fs.statSync(reportFile).birth);
+            } catch (ex) { reject(ex) }
+            // fs.stat(reportFile, function (err, stats) {
+            //     if (err) reject(err);
+            //     resolve(stats.birthtime);
+            // });
         });
-
     });
 }
 
@@ -89,6 +82,18 @@ function runningTime() {
             console.error("Here are stats :", deltaTime);
             resolve(deltaTime);
         });
+    });
+}
+
+function createLock() {
+    fs.open(lockFile, 'wx', (err, fd) => {
+        if (err) {
+            if (err.code === 'EEXIST') {
+                console.error(lockFile + ' myfile already exists');
+                return;
+            }
+            throw err;
+        }
     });
 }
 
