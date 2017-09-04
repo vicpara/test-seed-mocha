@@ -61,9 +61,10 @@ function reportCreationTime() {
     fileExists(reportFile).then((exists) => {
         console.error(" >>> HERE WE HAAAAAAVVVEEE: " + exists)
         return new Promise(function(resolve, reject) {
-            try {
-                resolve(fs.statSync(reportFile).birth);
-            } catch (ex) { reject(ex) }
+            resolve(10);
+            // try {
+            //     resolve(fs.statSync(reportFile).birth);
+            // } catch (ex) { reject(ex) }
             // fs.stat(reportFile, function (err, stats) {
             //     if (err) reject(err);
             //     resolve(stats.birthtime);
